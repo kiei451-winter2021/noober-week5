@@ -1,28 +1,31 @@
+function levelOfService(ride) {
+  let levelOfService
+  if (ride.length > 1) {
+    levelOfService = 'Noober Pool'
+  } else if (ride[0].purpleRequested) {
+    levelOfService = 'Noober Purple'
+  } else if (ride[0].numberOfPassengers > 3) {
+    levelOfService = 'Noober XL'
+  } else {
+    levelOfService = 'Noober X'
+  }
+  return levelOfService
+}
+
 function renderRides(ridesArray) {
   for (let i = 0; i < ridesArray.length; i++) {
     let ride = ridesArray[i]
 
-    let levelOfService
-    if (ride.length > 1) {
-      levelOfService = 'Noober Pool'
-    } else if (ride[0].purpleRequested) {
-      levelOfService = 'Noober Purple'
-    } else if (ride[0].numberOfPassengers > 3) {
-      levelOfService = 'Noober XL'
-    } else {
-      levelOfService = 'Noober X'
-    }
-
     document.querySelector('.rides').insertAdjacentHTML('beforeend', `
       <h1 class="inline-block mt-8 px-4 py-2 rounded-xl text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
         <i class="fas fa-car-side"></i>
-        <span>${levelOfService}</span>
+        <span>${levelOfService(ride)}</span>
       </h1>
     `)
 
     let borderClass
     let backgroundClass
-    if (levelOfService == 'Noober Purple') {
+    if (levelOfService(ride) == 'Noober Purple') {
       borderClass = 'border-purple-500'
       backgroundClass = 'bg-purple-600'
     } else {
